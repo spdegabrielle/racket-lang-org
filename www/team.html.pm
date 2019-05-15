@@ -43,7 +43,7 @@
 
 ◊link["https://jeapostrophe.github.io/home/"]{Jay McCarthy}
 
-◊link["https://cs.brown.edu/~kfisler/"]{Kathi Fisler}
+◊link["http://www.cs.wpi.edu/~kfisler/"]{Kathi Fisler}
 
 ◊link["http://www.deinprogramm.de/sperber/"]{Michael Sperber}
 
@@ -114,6 +114,9 @@ Lowell MA
 ◊link["http://www.brinckerhoff.org/"]{California Polytechnic 
 State University}
 San Luis Obispo CA
+
+◊link["https://web.cs.wpi.edu/~kfisler/"]{Worcester Polytechnic Institute}
+Worcester MA
 
 ◊link["http://homes.soic.indiana.edu/samth/"]{Indiana University}
 Bloomington IN
