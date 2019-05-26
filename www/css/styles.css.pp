@@ -342,7 +342,7 @@ section#logo * {
   padding-bottom: 0;
 }
 
-section#bottom, p#bottom {
+section#bottom {
   font-size: 70%;
 }
 
