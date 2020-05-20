@@ -45,15 +45,9 @@ racket/format)
 ◊special-section[#:class "one-column-body-text" #:style "font-size:77%" #:id "pull-quote"]{
 
 ◊ul[#:class "doclinks"]{
- ◊li{◊link["https://blog.racket-lang.org/2019/05/racket-v7-3.html"]{Racket version 7.3} is available.}
+ ◊li{◊link["https://blog.racket-lang.org/2019/05/racket-v7-7.html"]{Racket version 7.7} is available.}
 
-  ◊li{◊link["https://thestrangeloop.com/2019/number-lang-wishful-thinking.html"]{Vlad Kozin will speak at Strange Loop} on language-oriented programming in Racket}
-
- ◊li{◊link["https://school.racket-lang.org"]{Racket School 2019}—Learn how to make programming languages, July 8–-12 in Salt Lake City. Students, ask about Financial aid.} 
-
- ◊li{◊link["https://con.racket-lang.org/"]{ninth RacketCon} immediately follows the Racket School.}
-
- ◊li{Join us for both events in Salt Lake City!}}}
+ ◊li{◊link["https://con.racket-lang.org/"]{tenth RacketCon} will take place, sometime, somewhere.}}}
 
 
 ◊div[#:class "frontpage-card"]{
@@ -66,11 +60,11 @@ racket/format)
   Racket, the Programming Language}}
 ◊div[#:class "frontpage-bar"]{
   ◊button[#:class"frontpage-bar-item frontpage-button frontpage-bar-flex2 unselected-tab langtablink" #:onclick "openTab('the-language',event,'mature','langtablink',true)"]{◊div[#:style "mitem"]{Mature}}
-  ◊button[#:class "frontpage-bar-item frontpage-button  frontpage-bar-flex4 unselected-tab langtablink" #:onclick "openTab('the-language',event,'batteries','langtablink',true)"]{◊div[#:style "mitem"]{Batteries Included}}
+  ◊button[#:class "frontpage-bar-item frontpage-button  frontpage-bar-flex4 unselected-tab langtablink" #:onclick "openTab('the-language',event,'batteries','langtablink',true)"]{◊div[#:style "mitem"]{Jet Fuel}}
   ◊button[#:class "frontpage-bar-item frontpage-button frontpage-bar-flex3 unselected-tab langtablink" #:onclick "openTab('the-language',event,'extensible','langtablink',true)"]{◊div[#:style "mitem"]{Extensible}}
-  ◊button[#:class "frontpage-bar-item frontpage-button frontpage-bar-flex2 unselected-tab langtablink" #:onclick "openTab('the-language',event,'strong','langtablink',true)"]{◊div[#:style "mitem"]{Strong}}
+  ◊button[#:class "frontpage-bar-item frontpage-button frontpage-bar-flex2 unselected-tab langtablink" #:onclick "openTab('the-language',event,'strong','langtablink',true)"]{◊div[#:style "mitem"]{Robust}}
   ◊button[#:class "frontpage-bar-item frontpage-button frontpage-bar-flex2 unselected-tab langtablink" #:onclick "openTab('the-language',event,'drracket','langtablink',true)"]{◊div[#:style "mitem"]{Polished}}
-  ◊button[#:class "frontpage-bar-item frontpage-button frontpage-bar-flex5 unselected-tab langtablink" #:onclick "openTab('the-language',event,'open','langtablink',true)"]{◊div[#:style "mitem"]{With a Vibrant Community}}
+  ◊button[#:class "frontpage-bar-item frontpage-button frontpage-bar-flex5 unselected-tab langtablink" #:onclick "openTab('the-language',event,'open','langtablink',true)"]{◊div[#:style "mitem"]{Vibrant Community}}
 }}
 
 
@@ -155,17 +149,25 @@ Newcomers describe the on-line Racket community as extremely ◊strong{friendly 
     ◊div[#:style "display:flex"]{
       ◊img[#:alt "large logo"
            #:src "img/racket-logo.svg"
-           #:style "margin-right: 40px; width: 200px;height: 200px;"]{}
-
+           #:style "margin-right: 50px; margin-top: 20px; width: 275px;height: 275px;"]{}
       ◊div{◊langwww["#lang racket/gui"]{
-◊pre{;; let's play a guessing game
-(◊docs{define} frame (◊docs{new} frame% [label "Guess"]))
-(◊docs{define} n (◊docs{random} 5)) 
-(◊docs{define} ((check i) btn evt)
-  (◊docs{message-box} "?" (◊docs{if} (◊docs{=} i n) "Yes" "No")))
-(◊docs{for} ([i (◊docs{in-range} 5)]) 
-  (◊docs{make-object} ◊docs{button%} (◊docs{~a} i) frame (check i)))
-(◊docs{send} frame show #t)}}}}
+◊pre{
+(◊docs{define} my-language 'English)
+
+(◊docs{define} translations
+  #hash([English . "Hello world"]
+        [French . "Allô la monde"]
+        [German . "Hallo Welt"]
+        [Greek . "Γειά σου, κόσμε"]
+        [Portuguese . "Olá mundo"]
+        [Spanish . "Hola mundo"]))
+
+(◊docs{define} my-hello-world (hash-ref translations my-language "hello world"))
+
+my-hello-world
+(printf "~a\n" my-hello-world)
+(message-box "" my-hello-world)}
+}}}
 
     ◊div{}}}}}
 
@@ -194,31 +196,26 @@ Newcomers describe the on-line Racket community as extremely ◊strong{friendly 
     ◊tr[#:valign "top"]{
 
     ◊td{ 
-◊langwww["#lang racket" #:style "font-size:46%"]{
-◊pre{;; Defining and using simple syntactic extensions 
-(◊docs{require} racket/splicing)
+◊langwww["#lang racket" #:style "font-size:75%"]{
+◊pre{
+(◊docs{provide} time-it)
 
-;; define it ...
-(◊docs{define-syntax-rule}
-  (where definition 
-         ((define (locally-defined-id x ...) body-id)
-           ...))
-  (◊docs{splicing-letrec} 
-         ((locally-defined-id (lambda (x ...) body-id)) 
-           ...)
-         definition))
+(◊docs{require} (for-syntax syntax/parse))
 
-;; ... and use it immediately in the same module 
-(where (define is-5-odd (odd? 5))
-       {(define (odd? n)
-           (if (= n 1) #t (even? (- n 1))))
-        (define (even? n)
-            (if (= n 0) #t (even? (- n 1))))})
-  ;; { ... } are equivalent to ( ... )
+(◊docs{define-syntax} (time-it stx)
+  (◊docs{syntax-parse} stx 
+    [(_ task)
+     #'(thunk-time-it (◊docs{λ} () task))]))
 
+(◊docs{define} (thunk-time-it task)
+  (◊docs{define} before (cim))
+  (◊docs{define} answer (task))
+  (◊docs{define} delta  (- (cim) before))
+  (◊docs{printf} "time: ~a ms\n" delta)
+  answer)
 
-;; then use the newly defined identifier
-(if is-5-odd "five is odd" "five is not odd")}}}
+(◊docs{define} cim current-inexact-milliseconds)
+}}}
 
     ◊td{ }
 
@@ -230,12 +227,13 @@ Newcomers describe the on-line Racket community as extremely ◊strong{friendly 
      formulate a simple rule that rewrites a custom syntax to a
      Racket expression or definition.}
 
-     ◊p{Little macros can particularly help programmers
-     with DRY (Don't Repeat Yourself) where other
-     features can't. The example on the left shows how to
-     define a ◊tt{where} construct for definitions with a
-     few lines of code and how to use it immediately, in
-     the same module.}}
+     ◊p{Little macros can particularly help programmers with DRY 
+     where other features can't. The example on the left shows 
+     how to define a new syntax for measuring the time a task 
+     takes. The syntax avoids the repeated use of lambda. Note 
+     also how the macro is exported from this module as if it 
+     were an ordinary function.
+}}
 
    } } }}}
 
@@ -248,53 +246,42 @@ Newcomers describe the on-line Racket community as extremely ◊strong{friendly 
 
     ◊td{ 
 
-◊langwww["#lang racket/gui" #:style "font-size:46%"]{
-◊pre{;;a bi-directional temperature converter (Fahrenheit vs Celsius)
-(◊docs{require} syntax/parse/define)
+◊langwww["#lang racket/gui" #:style "font-size:75%"]{
+◊pre{;; let's play a guessing game
 
-(◊docs{define} *C 0)
-(◊docs{define} *F 0)
+(◊docs{define} frame (◊docs{new} frame% [label "Guess"]))
 
-(◊docs{define-syntax-rule}
-  (flow *from convert *to) 
-  (λ (x) (set!-values (*from *to) (values x (convert x)))))
+(◊docs{define} secret (◊docs{random} 5)) 
+(◊docs{define} ((check i) btn evt)
+  (◊docs{define} found? (◊docs{if} (◊docs{=} i secret) "Yes" "No"))
+  (◊docs{message-box} "?" found?)
+  (◊docs{when} (= i secret) 
+    (◊docs{send} frame show #false)))
 
-(◊docs{define} ((callback setter) . self+evt)
-  (◊docs{define} field:num (if (◊docs{empty?} self+evt) 0 (◊docs{string-number} (◊docs{send} (◊docs{first} self+evt) get-value))))
-  (◊docs{when} field:num
-    (setter field:num)
-    (◊docs{send} C-field set-value (~r *C #:precision 4))
-    (◊docs{send} F-field set-value (~r *F #:precision 4))))
+(◊docs{for} ([i (◊docs{in-range} 5)]) 
+   (◊docs{new} button%
+	[label (~a i)]
+	[parent frame]
+	[callback (check i)]))
 
-(◊docs{define} (field lbl cb)
-  (◊docs{new} ◊docs{text-field%} [parent pane] [label lbl] [init-value ""] [callback cb]))
-
-(◊docs{define} celsius->fahrenheit (callback (flow *C (λ (c) (+ (* c 9/5) 32)) *F)))
-(◊docs{define} fahrenheit->celsius (callback (flow *F (λ (f) (* (- f 32) 5/9)) *C)))
-
-(◊docs{define} frame   (new frame% [label "temperature converter"]))
-(◊docs{define} pane    (new horizontal-pane% [parent frame]))
-(◊docs{define} C-field (field "celsius:"       C-2-F))
-(◊docs{define} F-field (field " = fahrenheit:" F-2-C))
-
-(update-gui)
-(◊docs{send} frame show #t)
-}}}
+(◊docs{send} frame show #t)}
+}}
   
     ◊td{ 
 
     ◊p{Racket comes with a comprehensive suite of
-    libraries: ◊link[racket/gui]{a cross-platform GUI toolbox}, a
-    ◊link[web-server]{web server}, and more. ◊link[packages]{Thousands of}
-    ◊link[packages]{additional packages} are a ◊link[raco-pkg]{single command}
-    away: from video editing to scientific 
-    simulations, from web testing to 3D graphics.}
+    libraries: ◊link[racket/gui]{a cross-platform GUI toolbox}, a ◊link[web-server]{web server}, 
+    and more. ◊link[packages]{Thousands of} ◊link[packages]{additional packages} are 
+    a ◊link[raco-pkg]{single command} away: 3D graphics, a bluetooth 
+    socket connector, color maps, data structures, educational 
+    software, games, a quantum-random number generator, 
+    scientific simulations, web script testing, and many more.}
 
-    ◊p{Macros work with these tools. The example
-    on the left shows how to use a little macro
-    to define a macro for defining GUI callbacks,
-    abstracting where a function or method
-    couldn't. }}
+    ◊p{Macros work with these tools. The example on the left
+    shows the implementation of a small number-guessing
+    game. It is implemented in the GUI dialect of Racket,
+    and demonstrates a number of language features. 
+}}
 
 }}}}}
 
@@ -382,11 +369,11 @@ Newcomers describe the on-line Racket community as extremely ◊strong{friendly 
 
     ◊td{
 
-   ◊p{Real Racket programmers love parentheses, but they
+   ◊p{Racket programmers usually love parentheses, but they
       have empathy for those few who need commas and
       braces.  Hence, building languages with
       conventional surface syntax, like that of ◊link[datalog]{datalog}, 
-      is almost as easy as building beautiful languages.}
+      is almost as easy as building parenthetical languages.}
 
   ◊p{Racket's ecosystem comes with ◊link[br-parsing]{parsing packages} that
   allow developers to easily map any syntax to a
