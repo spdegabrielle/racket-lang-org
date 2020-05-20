@@ -156,7 +156,7 @@ Newcomers describe the on-line Racket community as extremely ◊strong{friendly 
 
 (◊docs{define} translations
   #hash([English . "Hello world"]
-        [French . "Allô la monde"]
+        [French . "Allô le monde"]
         [German . "Hallo Welt"]
         [Greek . "Γειά σου, κόσμε"]
         [Portuguese . "Olá mundo"]
