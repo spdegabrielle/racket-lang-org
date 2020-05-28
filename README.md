@@ -33,7 +33,17 @@ To build:
 
   This renders the site in some temp directory and then moves the directory
   to 'Web` here. It will also open the front-page index file in your
-  default browser on the Mac. 
+  default browser on the Mac.
+
+* `pollen` problems 
+
+  `pollen` occasionally fails with really strange "deep in the guts"
+  error messages. `pollen` changes and doesn't work right with its old
+  files. After double-checking that you have everything in a new
+  commit, does **DANGER!** `git clean -d -x -f`. 
+
+  **DANGER!** Really make sure that you don't have any files you want
+  to keep that aren't committed! This command also rm's uncommitted files. 
 
 * Run "racket all.rkt -o <dir>" to build all pages to subdirectories of
   <dir>. As a safety measure, the target directory must not overlap
