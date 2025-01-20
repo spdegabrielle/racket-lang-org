@@ -129,6 +129,7 @@ Racket comes with support for major editors. The main bundle includes an innovat
 
 ◊tabs[#:group-id "racket-lop-group"
   ◊tab[#:heading? #t #:id "racket-lop" #:title "Racket, the Language-Oriented Programming Language"]{
+Racket is a programming language for creating new programming languages.
   ◊div[#:class "container-fluid vertical-in-smartphones-horizontal-otherwise"
        #:style "font-size:77%"]{
     ◊div[#:class "block-with-1em-margin"]{
